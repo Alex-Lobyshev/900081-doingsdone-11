@@ -1,6 +1,9 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+
+$project_array = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -42,10 +45,14 @@ $show_complete_tasks = rand(0, 1);
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
-                            <span class="main-navigation__list-item-count">0</span>
-                        </li>
+                        <?php foreach($project_array as $value): ?>
+                            <?php if (isset($value)):?>
+                                <li class="main-navigation__list-item">
+                                    <a class="main-navigation__list-item-link" href="#"><?=$value?></a>
+                                    <span class="main-navigation__list-item-count">0</span>
+                                </li>
+                            <?endif;?>
+                        <?endforeach;?>
                     </ul>
                 </nav>
 
