@@ -1,6 +1,48 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+
+$project_array = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
+
+
+$task_array = [
+    [
+        'task_name' => 'Собеседование в IT компании',
+        'date_complete' => '01.12.2019',
+        'task_category' => 'Работа',
+        'is_complete' => false,
+    ],
+    [
+        'task_name' => 'Выполнить тестовое задание',
+        'date_complete' => '25.12.2019',
+        'task_category' => 'Работа',
+        'is_complete' => false,
+    ],
+    [
+        'task_name' => 'Сделать задание первого раздела',
+        'date_complete' => '21.12.2019',
+        'task_category' => 'Учеба',
+        'is_complete' => true,
+    ],
+    [
+        'task_name' => 'Встреча с другом',
+        'date_complete' => '22.12.2019',
+        'task_category' => 'Входящие',
+        'is_complete' => false,
+    ],
+    [
+        'task_name' => 'Купить корм для кота',
+        'date_complete' => null,
+        'task_category' => 'Домашние дела',
+        'is_complete' => false,
+    ],
+    [
+        'task_name' => 'Заказать пиццу',
+        'date_complete' => null,
+        'task_category' => 'Домашние дела',
+        'is_complete' => false,
+    ]
+];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -42,10 +84,14 @@ $show_complete_tasks = rand(0, 1);
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
-                            <span class="main-navigation__list-item-count">0</span>
-                        </li>
+                        <?php foreach($project_array as $value): ?>
+                            <?php if (isset($value)):?>
+                                <li class="main-navigation__list-item">
+                                    <a class="main-navigation__list-item-link" href="#"><?=$value?></a>
+                                    <span class="main-navigation__list-item-count">0</span>
+                                </li>
+                            <?endif;?>
+                        <?endforeach;?>
                     </ul>
                 </nav>
 
@@ -78,33 +124,44 @@ $show_complete_tasks = rand(0, 1);
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
-                            </label>
-                        </td>
+                    <!--Запускаю цикл foreach для того чтобы пробежать ассоциативный массив-->
+                    <?php foreach ($task_array as $task => $value):?>
+                        <!--Проверяю, если в ключе "Выполнена" значение выполнена, то добавляю класс task--completed-->
+                            <tr class="tasks__item task <?php if($value['is_complete']) :?>task--completed<?php endif;?>">
+                                <!--Проверяю отмечен ли чекбокс показывать выполненные задачи и выполнена ли задача(два
+                                одновременных условия). Если стоит чекбокс и задача выполнена, то задача показывается,
+                                если чекбокс не отмечен, задача скрыта)-->
+                                <?php if ($show_complete_tasks===0 and $value['is_complete']) continue;?>
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                        <!--вывожу название задачи-->
+                                        <span class="checkbox__text"><?=$value['task_name']?></span>
+                                    </label>
+                                </td>
 
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
+                                <td class="task__file">
+                                    <a class="download-link" href="#">Home.psd</a>
+                                </td>
+                                <!--
+                                    Делаю проверку на NULL в ключе date_complete, если там NULL тогда выводить "не известно",
+                                в остальном выводить дату.
+                                isset вернет true если в переменно не NULL, false если NULL. Отрицанием !isset я получаю true
+                                и вывожу 'не известно'. В остальных случаях показывается дата.
 
-                        <td class="task__date"></td>
-                    </tr>
-                    <?php if ($show_complete_tasks) :?>
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-                        <tr class="tasks__item task task--completed">
-                            <td class="task__select">
-                                <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                    <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
-                                </label>
-                            </td>
-                            <td class="task__date">10.10.2019</td>
-                            <td class="task__controls"></td>
-                        </tr>
-                    <?php endif;?>
+                                Но тут возникает вопрос,если в ключе 'date_complete' => 'null' - null записать в
+                                кавычках то ничего не работает. Если без кавычек, то работает.
+
+                                -->
+                                <td class="task__date"><?php if(isset($value['date_complete'])) {
+                                        echo ($value['date_complete']);
+                                } else {
+                                        echo ('не известно');
+                                    };?>
+                                </td>
+                                <td class="task__controls"></td>
+                            </tr>
+                    <?endforeach;?>
                 </table>
             </main>
         </div>
