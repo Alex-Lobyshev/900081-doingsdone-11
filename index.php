@@ -10,37 +10,37 @@ $task_array = [
         'task_name' => 'Собеседование в IT компании',
         'date_complete' => '01.12.2019',
         'task_category' => 'Работа',
-        'is_complete' => 'false',
+        'is_complete' => false,
     ],
     [
         'task_name' => 'Выполнить тестовое задание',
         'date_complete' => '25.12.2019',
         'task_category' => 'Работа',
-        'is_complete' => 'false',
+        'is_complete' => false,
     ],
     [
         'task_name' => 'Сделать задание первого раздела',
         'date_complete' => '21.12.2019',
         'task_category' => 'Учеба',
-        'is_complete' => 'true',
+        'is_complete' => true,
     ],
     [
         'task_name' => 'Встреча с другом',
         'date_complete' => '22.12.2019',
         'task_category' => 'Входящие',
-        'is_complete' => 'false',
+        'is_complete' => false,
     ],
     [
         'task_name' => 'Купить корм для кота',
         'date_complete' => null,
         'task_category' => 'Домашние дела',
-        'is_complete' => 'false',
+        'is_complete' => false,
     ],
     [
         'task_name' => 'Заказать пиццу',
         'date_complete' => null,
         'task_category' => 'Домашние дела',
-        'is_complete' => 'false',
+        'is_complete' => false,
     ]
 ];
 ?>
@@ -126,14 +126,12 @@ $task_array = [
                 <table class="tasks">
                     <!--Запускаю цикл foreach для того чтобы пробежать ассоциативный массив-->
                     <?php foreach ($task_array as $task => $value):?>
-                    <!--Делаю проверку на существование в массиве значения $value-->
-                        <?php if(in_array($value, $task_array)):?>
                         <!--Проверяю, если в ключе "Выполнена" значение выполнена, то добавляю класс task--completed-->
-                            <tr class="tasks__item task <?php if($value['is_complete'] === 'true') :?>task--completed<?php endif;?>">
+                            <tr class="tasks__item task <?php if($value['is_complete']) :?>task--completed<?php endif;?>">
                                 <!--Проверяю отмечен ли чекбокс показывать выполненные задачи и выполнена ли задача(два
                                 одновременных условия). Если стоит чекбокс и задача выполнена, то задача показывается,
                                 если чекбокс не отмечен, задача скрыта)-->
-                                <?php if ($show_complete_tasks===0 and $value['is_complete'] === 'true') continue;?>
+                                <?php if ($show_complete_tasks===0 and $value['is_complete']) continue;?>
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -155,7 +153,7 @@ $task_array = [
                                 кавычках то ничего не работает. Если без кавычек, то работает.
 
                                 -->
-                                <td class="task__date"><?php if(isset($value['date_complete']) && $value['date_complete'] !=NULL && $value['date_complete'] !='null') {
+                                <td class="task__date"><?php if(isset($value['date_complete'])) {
                                         echo ($value['date_complete']);
                                 } else {
                                         echo ('не известно');
@@ -163,7 +161,6 @@ $task_array = [
                                 </td>
                                 <td class="task__controls"></td>
                             </tr>
-                        <?endif;?>
                     <?endforeach;?>
                 </table>
             </main>
