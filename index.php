@@ -155,10 +155,10 @@ $task_array = [
                                 кавычках то ничего не работает. Если без кавычек, то работает.
 
                                 -->
-                                <td class="task__date"><?php if(!isset($value['date_complete'])) {
-                                        echo ('не известно');}
-                                    else {
+                                <td class="task__date"><?php if(isset($value['date_complete']) && $value['date_complete'] !=NULL && $value['date_complete'] !='null') {
                                         echo ($value['date_complete']);
+                                } else {
+                                        echo ('не известно');
                                     };?>
                                 </td>
                                 <td class="task__controls"></td>
