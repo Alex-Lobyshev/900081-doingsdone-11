@@ -43,6 +43,18 @@ $task_array = [
         'is_complete' => false,
     ]
 ];
+
+
+function count_task($task_array,$category_name) {
+    $count_task_number=0;
+    foreach($task_array as $key => $value) {
+        if(isset($value['task_category']) && $value['task_category'] === $category_name){
+            $count_task_number += 1;
+        }
+    }
+
+    return $count_task_number;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -88,7 +100,7 @@ $task_array = [
                             <?php if (isset($value)):?>
                                 <li class="main-navigation__list-item">
                                     <a class="main-navigation__list-item-link" href="#"><?=$value?></a>
-                                    <span class="main-navigation__list-item-count">0</span>
+                                    <span class="main-navigation__list-item-count"><?=count_task($task_array,$value)?></span>
                                 </li>
                             <?endif;?>
                         <?endforeach;?>
