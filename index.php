@@ -45,10 +45,10 @@ $task_array = [
 ];
 
 
-function count_task($task_array,$task_name) {
+function count_task($task_array,$category_name) {
     $count_task_number=0;
     foreach($task_array as $key => $value) {
-        if(isset($value['task_category']) && $value['task_category'] === $task_name){
+        if(isset($value['task_category']) && $value['task_category'] === $category_name){
             $count_task_number += 1;
         }
     }
