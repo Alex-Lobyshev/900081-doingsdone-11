@@ -6,7 +6,7 @@
             <?php foreach($project_array as $value): ?>
                 <?php if (isset($value)):?>
                     <li class="main-navigation__list-item">
-                        <a class="main-navigation__list-item-link" href="#"><?=$value?></a>
+                        <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($value)?></a>
                         <span class="main-navigation__list-item-count"><?=count_task($task_array,$value)?></span>
                     </li>
                 <?endif;?>
@@ -55,7 +55,7 @@
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                         <!--вывожу название задачи-->
-                        <span class="checkbox__text"><?=$value['task_name']?></span>
+                        <span class="checkbox__text"><?=htmlspecialchars($value['task_name'])?></span>
                     </label>
                 </td>
 
@@ -73,7 +73,7 @@
 
                 -->
                 <td class="task__date"><?php if(isset($value['date_complete'])) {
-                        echo ($value['date_complete']);
+                        echo (htmlspecialchars($value['date_complete']));
                     } else {
                         echo ('не известно');
                     };?>
