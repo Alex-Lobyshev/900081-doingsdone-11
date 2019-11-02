@@ -28,7 +28,7 @@ $task_array = [
     ],
     [
         'task_name' => 'Встреча с другом',
-        'date_complete' => '02.11.2019',
+        'date_complete' => '03.11.2019',
         'task_category' => 'Входящие',
         'is_complete' => false,
     ],
