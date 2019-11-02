@@ -1,6 +1,7 @@
 <?php
 require_once 'helpers.php';
 // показывать или нет выполненные задачи
+date_default_timezone_set('Europe/Moscow');
 $show_complete_tasks = rand(0, 1);
 
 $project_array = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
@@ -9,7 +10,7 @@ $project_array = ['Входящие', 'Учеба', 'Работа', 'Домаш�
 $task_array = [
     [
         'task_name' => 'Собеседование в IT компании',
-        'date_complete' => '01.12.2019',
+        'date_complete' => '03.11.2019',
         'task_category' => 'Работа',
         'is_complete' => false,
     ],
@@ -27,7 +28,7 @@ $task_array = [
     ],
     [
         'task_name' => 'Встреча с другом',
-        'date_complete' => '22.12.2019',
+        'date_complete' => '02.11.2019',
         'task_category' => 'Входящие',
         'is_complete' => false,
     ],
@@ -44,7 +45,6 @@ $task_array = [
         'is_complete' => false,
     ]
 ];
-
 
 function count_task($task_array,$category_name) {
     $count_task_number=0;
