@@ -42,7 +42,7 @@ $task_array = [
         'task_name' => 'Заказать пиццу',
         'date_complete' => null,
         'task_category' => 'Домашние дела',
-        'is_complete' => false
+        'is_complete' => true
     ]
 ];
 
