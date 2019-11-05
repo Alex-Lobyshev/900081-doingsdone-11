@@ -34,7 +34,7 @@ $task_array = [
     ],
     [
         'task_name' => 'Купить корм для кота',
-        'date_complete' => null,
+        'date_complete' => '03.11.2019',
         'task_category' => 'Домашние дела',
         'is_complete' => false,
     ],
@@ -42,7 +42,7 @@ $task_array = [
         'task_name' => 'Заказать пиццу',
         'date_complete' => null,
         'task_category' => 'Домашние дела',
-        'is_complete' => false,
+        'is_complete' => false
     ]
 ];
 

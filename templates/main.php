@@ -48,9 +48,11 @@
             <!--Проверяю, если в ключе "Выполнена" значение выполнена, то добавляю класс task--completed-->
             <?php if(isset($value['date_complete'])) {
                 $finish_time = strtotime(htmlspecialchars($value['date_complete']));
-                $time_left = floor(($finish_time - time()) / 3600);
-            };?>
-            <tr class="tasks__item task <?php if($time_left <= 24 && $value['date_complete'] != NULL ) :?>task--important<?php endif;?> <?php if($value['is_complete']) :?>task--completed<?php endif;?>">
+                $time_left = floor(($finish_time - time()) / 3600);?>
+                <tr class="tasks__item task <?php if($time_left <= 24) :?>task--important<?php endif;?> <?php if($value['is_complete']) :?>task--completed<?php endif;?>">
+            <?php } else { ?>
+                <tr class="tasks__item task <?php if($value['is_complete']) :?>task--completed<?php endif;?>">
+            <?php };?>
                 <!--Проверяю отмечен ли чекбокс показывать выполненные задачи и выполнена ли задача(два
                 одновременных условия). Если стоит чекбокс и задача выполнена, то задача показывается,
                 если чекбокс не отмечен, задача скрыта)-->
@@ -87,3 +89,4 @@
         <?endforeach;?>
     </table>
 </main>
+
