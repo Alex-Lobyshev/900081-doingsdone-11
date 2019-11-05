@@ -46,7 +46,8 @@
         <!--Запускаю цикл foreach для того чтобы пробежать ассоциативный массив-->
         <?php foreach ($task_array as $task => $value):?>
             <!--Проверяю, если в ключе "Выполнена" значение выполнена, то добавляю класс task--completed-->
-            <tr class="tasks__item task <?php if($value['is_complete']) :?>task--completed<?php endif;?>">
+
+                <tr class="tasks__item task <?php if(check_date($value['date_complete'])) :?>task--important<?php endif;?> <?php if($value['is_complete']) :?>task--completed<?php endif;?>">
                 <!--Проверяю отмечен ли чекбокс показывать выполненные задачи и выполнена ли задача(два
                 одновременных условия). Если стоит чекбокс и задача выполнена, то задача показывается,
                 если чекбокс не отмечен, задача скрыта)-->
@@ -72,14 +73,15 @@
                 кавычках то ничего не работает. Если без кавычек, то работает.
 
                 -->
-                <td class="task__date"><?php if(isset($value['date_complete'])) {
-                        echo (htmlspecialchars($value['date_complete']));
-                    } else {
+       <td class="task__date"><?php if(isset($value['date_complete'] )) {
+                       echo $value['date_complete'];
+                   } else {
                         echo ('не известно');
-                    };?>
-                </td>
+                   };?>
+             </td>
                 <td class="task__controls"></td>
             </tr>
         <?endforeach;?>
     </table>
 </main>
+

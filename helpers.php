@@ -142,3 +142,17 @@ function include_template($name, array $data = []) {
 
     return $result;
 }
+
+
+function check_date($date) {
+    if(isset($date)) {
+        $finish_time = strtotime(htmlspecialchars($date));
+        $time_left = floor(($finish_time - time()) / 3600);
+        if ($time_left <=24) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
