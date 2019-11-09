@@ -29,5 +29,5 @@ id INT AUTO_iNCREMENT PRIMARY KEY,
 date_create_acc TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 email VARCHAR(128) NOT NULL UNIQUE,
 name VARCHAR(128),
-pass varchar (255),
+pass varchar (255)
 );
