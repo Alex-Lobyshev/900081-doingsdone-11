@@ -37,13 +37,11 @@ UPDATE task SET user_id = 2 WHERE ID = 4;
 
 
 <!--- Выбор списка из всех проектов для одного пользователя;-->
-SELECT * FROM task t
-JOIN user u on t.user_id = u.id AND u.id = 3
+SELECT * FROM task  user_id = 3
 
 
 <!---Получение списка из всех задач для одного проекта-->
-SELECT * FROM task t
-JOIN project p on t.project_id = p.id AND p.id = 3
+SELECT * FROM task WHERE project_id = 3
 
 
 <!---пометить задачу как выполненную;-->
