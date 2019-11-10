@@ -37,7 +37,7 @@ UPDATE task SET user_id = 2 WHERE ID = 4;
 
 
 <!--- Выбор списка из всех проектов для одного пользователя;-->
-SELECT * FROM task  user_id = 3
+SELECT * FROM project WHERE user_id = 3
 
 
 <!---Получение списка из всех задач для одного проекта-->
