@@ -144,6 +144,11 @@ function include_template($name, array $data = []) {
 }
 
 
+/**
+ * Проверяет дату меньше она 24 часов или нет, передает дату и возвращает true если меньше 24 и false если больше
+ * @param string $date
+ * @return boolean true / false
+ */
 function check_date($date) {
     if(isset($date)) {
         $finish_time = strtotime(htmlspecialchars($date));
@@ -156,3 +161,23 @@ function check_date($date) {
     }
 }
 
+
+function get_projects($db_connect, $user_id){
+    $link = mysqli_connect($db_connect['host'], $db_connect['user'], $db_connect['password'], $db_connect['database']);
+    mysqli_set_charset($link, 'utf8');
+
+    if (!$link) {
+        $error = mysqli_connect_error();
+        print ('Ошибка MySQL' . $error);
+    } else {
+        $sql = "SELECT `id`, `name` FROM project WHERE `user_id` = $user_id";
+        $result = mysqli_query($link, $sql);
+
+        if ($result) {
+            $project_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        } else {
+            $error = mysqli_connect_error();
+        }
+    }
+    return $project_array;
+};

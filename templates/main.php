@@ -3,13 +3,12 @@
 
     <nav class="main-navigation">
         <ul class="main-navigation__list">
-            <?php foreach($project_array as $value): ?>
-                <?php if (isset($value)):?>
+            <?php
+            foreach($project_array as $key => $value): ?>
                     <li class="main-navigation__list-item">
-                        <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($value)?></a>
-                        <span class="main-navigation__list-item-count"><?=count_task($task_array,$value)?></span>
+                        <a class="main-navigation__list-item-link" href="index.php?cat_id=<?=htmlspecialchars($value['id'])?>"><?=htmlspecialchars($value['name'])?></a>
+                        <span class="main-navigation__list-item-count"><?=$value?></span>
                     </li>
-                <?endif;?>
             <?endforeach;?>
         </ul>
     </nav>
