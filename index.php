@@ -2,8 +2,6 @@
 require_once 'helpers.php';
 require_once 'config/db.php';
 
-
-
 /*
 
 
@@ -55,7 +53,7 @@ $show_complete_tasks = rand(0, 1);
 /*$project_array = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];*/
 
 
-$task_array = [
+/*$task_array = [
     [
         'task_name' => 'Собеседование в IT компании',
         'date_complete' => '03.11.2019',
@@ -92,7 +90,7 @@ $task_array = [
         'task_category' => 'Домашние дела',
         'is_complete' => true
     ]
-];
+];*/
 
 /*function count_task($task_array,$category_name) {
     $count_task_number=0;
@@ -105,7 +103,7 @@ $task_array = [
     return $count_task_number;
 };*/
 
-$content = include_template('main.php',['project_array'=> get_projects($db_connect, 4), 'task_array'=>$task_array, 'show_complete_tasks'=>$show_complete_tasks]);
+$content = include_template('main.php',['project_array'=> get_projects($db_connect, 4), 'task_array'=>get_tasks($db_connect, 4), 'show_complete_tasks'=>$show_complete_tasks]);
 $layout = include_template('layout.php', ['title'=>'Главная - Дела в порядке', 'content'=> $content, 'user_name'=>'Константин']);
 print $layout;
 ?>

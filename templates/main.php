@@ -7,7 +7,7 @@
             foreach($project_array as $key => $value): ?>
                     <li class="main-navigation__list-item">
                         <a class="main-navigation__list-item-link" href="index.php?cat_id=<?=htmlspecialchars($value['id'])?>"><?=htmlspecialchars($value['name'])?></a>
-                        <span class="main-navigation__list-item-count"><?=$value?></span>
+                        <span class="main-navigation__list-item-count"></span>
                     </li>
             <?endforeach;?>
         </ul>
@@ -55,7 +55,7 @@
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                         <!--вывожу название задачи-->
-                        <span class="checkbox__text"><?=htmlspecialchars($value['task_name'])?></span>
+                        <span class="checkbox__text"><?=htmlspecialchars($value['name'])?></span>
                     </label>
                 </td>
 
