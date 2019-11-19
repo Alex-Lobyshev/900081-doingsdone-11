@@ -23,17 +23,17 @@ function is_date_valid(string $date) : bool {
 /**
  * Создает подготовленное выражение на основе готового SQL запроса и переданных данных
  *
- * @param $link mysqli Ресурс соединения
+ * @param $conn mysqli Ресурс соединения
  * @param $sql string SQL запрос с плейсхолдерами вместо значений
  * @param array $data Данные для вставки на место плейсхолдеров
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = []) {
-    $stmt = mysqli_prepare($link, $sql);
+function db_get_prepare_stmt($conn, $sql, $data = []) {
+    $stmt = mysqli_prepare($conn, $sql);
 
     if ($stmt === false) {
-        $errorMsg = 'Не удалось инициализировать подготовленное выражение: ' . mysqli_error($link);
+        $errorMsg = 'Не удалось инициализировать подготовленное выражение: ' . mysqli_error($conn);
         die($errorMsg);
     }
 
@@ -65,8 +65,8 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
         $func = 'mysqli_stmt_bind_param';
         $func(...$values);
 
-        if (mysqli_errno($link) > 0) {
-            $errorMsg = 'Не удалось связать подготовленное выражение с параметрами: ' . mysqli_error($link);
+        if (mysqli_errno($conn) > 0) {
+            $errorMsg = 'Не удалось связать подготовленное выражение с параметрами: ' . mysqli_error($conn);
             die($errorMsg);
         }
     }
@@ -161,17 +161,10 @@ function check_date($date) {
     }
 }
 
-
-function get_projects($db_connect, $user_id){
-    $link = mysqli_connect($db_connect['host'], $db_connect['user'], $db_connect['password'], $db_connect['database']);
-    mysqli_set_charset($link, 'utf8');
-
-    if (!$link) {
-        $error = mysqli_connect_error();
-        print ('Ошибка MySQL' . $error);
-    } else {
+function get_projects($conn, $user_id){
+    echo $conn;
         $sql = "SELECT `id`, `name` FROM project WHERE `user_id` = $user_id";
-        $result = mysqli_query($link, $sql);
+        $result = mysqli_query($conn, $sql);
 
         if ($result) {
             $project_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -179,22 +172,22 @@ function get_projects($db_connect, $user_id){
             $error = mysqli_connect_error();
             print ('Ошибка MySQL' . $error);
         }
-    }
+
     return $project_array;
 };
 
 /*function count_projects($db_connect, $user_id){
-    $link = mysqli_connect($db_connect['host'], $db_connect['user'], $db_connect['password'], $db_connect['database']);
-    mysqli_set_charset($link, 'utf8');
+    $conn = mysqli_connect($db_connect['host'], $db_connect['user'], $db_connect['password'], $db_connect['database']);
+    mysqli_set_charset($conn, 'utf8');
 
-    if (!$link) {
+    if (!$conn) {
         $error = mysqli_connect_error();
         print ('Ошибка MySQL' . $error);
     } else {
         $sql = "SELECT name, project_id, count(id) as total from task where user_id = 4 GROUP BY project_id
     JOIN project j where i.id = project_id
 ";
-        $result = mysqli_query($link, $sql);
+        $result = mysqli_query($conn, $sql);
 
         if ($result) {
             $project_array2 = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -212,16 +205,9 @@ function get_projects($db_connect, $user_id){
 
 };*/
 
-function get_tasks($db_connect, $user_id){
-    $link = mysqli_connect($db_connect['host'], $db_connect['user'], $db_connect['password'], $db_connect['database']);
-    mysqli_set_charset($link, 'utf8');
-
-    if (!$link) {
-        $error = mysqli_connect_error();
-        print ('Ошибка MySQL' . $error);
-    } else {
+function get_tasks($conn, $user_id){
         $sql = "SELECT `id`,`is_complete`, `name`, `file_path`, `date_complete`  FROM task WHERE `user_id` = $user_id";
-        $result = mysqli_query($link, $sql);
+        $result = mysqli_query($conn, $sql);
 
         if ($result) {
             $task_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -229,6 +215,6 @@ function get_tasks($db_connect, $user_id){
             $error = mysqli_connect_error();
             print ('Ошибка MySQL' . $error);
         }
-    }
+
     return $task_array;
 };
