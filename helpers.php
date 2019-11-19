@@ -161,10 +161,9 @@ function check_date($date) {
     }
 }
 
-function get_projects($conn, $user_id){
-    echo $conn;
+function get_projects($con, $user_id){
         $sql = "SELECT `id`, `name` FROM project WHERE `user_id` = $user_id";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($con, $sql);
 
         if ($result) {
             $project_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -205,9 +204,9 @@ function get_projects($conn, $user_id){
 
 };*/
 
-function get_tasks($conn, $user_id){
+function get_tasks($con, $user_id){
         $sql = "SELECT `id`,`is_complete`, `name`, `file_path`, `date_complete`  FROM task WHERE `user_id` = $user_id";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($con, $sql);
 
         if ($result) {
             $task_array = mysqli_fetch_all($result, MYSQLI_ASSOC);

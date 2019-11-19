@@ -6,7 +6,7 @@
             <?php
             foreach($project_array as $key => $value): ?>
                     <li class="main-navigation__list-item">
-                        <a class="main-navigation__list-item-link" href="index.php?cat_id=<?=htmlspecialchars($value['id'])?>"><?=htmlspecialchars($value['name'])?></a>
+                        <a class="main-navigation__list-item-link" href=""><?=htmlspecialchars($value['name'])?></a>
                         <span class="main-navigation__list-item-count"></span>
                     </li>
             <?endforeach;?>
