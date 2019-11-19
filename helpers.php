@@ -23,17 +23,17 @@ function is_date_valid(string $date) : bool {
 /**
  * Создает подготовленное выражение на основе готового SQL запроса и переданных данных
  *
- * @param $link mysqli Ресурс соединения
+ * @param $conn mysqli Ресурс соединения
  * @param $sql string SQL запрос с плейсхолдерами вместо значений
  * @param array $data Данные для вставки на место плейсхолдеров
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = []) {
-    $stmt = mysqli_prepare($link, $sql);
+function db_get_prepare_stmt($conn, $sql, $data = []) {
+    $stmt = mysqli_prepare($conn, $sql);
 
     if ($stmt === false) {
-        $errorMsg = 'Не удалось инициализировать подготовленное выражение: ' . mysqli_error($link);
+        $errorMsg = 'Не удалось инициализировать подготовленное выражение: ' . mysqli_error($conn);
         die($errorMsg);
     }
 
@@ -65,8 +65,8 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
         $func = 'mysqli_stmt_bind_param';
         $func(...$values);
 
-        if (mysqli_errno($link) > 0) {
-            $errorMsg = 'Не удалось связать подготовленное выражение с параметрами: ' . mysqli_error($link);
+        if (mysqli_errno($conn) > 0) {
+            $errorMsg = 'Не удалось связать подготовленное выражение с параметрами: ' . mysqli_error($conn);
             die($errorMsg);
         }
     }
@@ -144,6 +144,11 @@ function include_template($name, array $data = []) {
 }
 
 
+/**
+ * Проверяет дату меньше она 24 часов или нет, передает дату и возвращает true если меньше 24 и false если больше
+ * @param string $date
+ * @return boolean true / false
+ */
 function check_date($date) {
     if(isset($date)) {
         $finish_time = strtotime(htmlspecialchars($date));
@@ -156,3 +161,59 @@ function check_date($date) {
     }
 }
 
+function get_projects($con, $user_id){
+        $sql = "SELECT `id`, `name` FROM project WHERE `user_id` = $user_id";
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            $project_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        } else {
+            $error = mysqli_connect_error();
+            print ('Ошибка MySQL' . $error);
+        }
+
+    return $project_array;
+};
+
+/*function count_projects($db_connect, $user_id){
+    $conn = mysqli_connect($db_connect['host'], $db_connect['user'], $db_connect['password'], $db_connect['database']);
+    mysqli_set_charset($conn, 'utf8');
+
+    if (!$conn) {
+        $error = mysqli_connect_error();
+        print ('Ошибка MySQL' . $error);
+    } else {
+        $sql = "SELECT name, project_id, count(id) as total from task where user_id = 4 GROUP BY project_id
+    JOIN project j where i.id = project_id
+";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            $project_array2 = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            foreach ($project_array2 as $key => $value) {
+                print $value['name'].$value['total'];
+                print '<br>';
+            }
+        } else {
+            $error = mysqli_connect_error();
+            print ('Ошибка MySQL' . $error);
+        }
+    }
+    return $project_array2;
+
+
+};*/
+
+function get_tasks($con, $user_id){
+        $sql = "SELECT `id`,`is_complete`, `name`, `file_path`, `date_complete`  FROM task WHERE `user_id` = $user_id";
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            $task_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        } else {
+            $error = mysqli_connect_error();
+            print ('Ошибка MySQL' . $error);
+        }
+
+    return $task_array;
+};

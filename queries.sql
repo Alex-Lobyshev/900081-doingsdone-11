@@ -40,6 +40,7 @@ UPDATE task SET user_id = 2 WHERE ID = 4;
 SELECT * FROM project WHERE user_id = 3
 
 
+
 <!---Получение списка из всех задач для одного проекта-->
 SELECT * FROM task WHERE project_id = 3
 

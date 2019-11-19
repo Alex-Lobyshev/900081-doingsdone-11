@@ -3,13 +3,12 @@
 
     <nav class="main-navigation">
         <ul class="main-navigation__list">
-            <?php foreach($project_array as $value): ?>
-                <?php if (isset($value)):?>
+            <?php
+            foreach($project_array as $key => $value): ?>
                     <li class="main-navigation__list-item">
-                        <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($value)?></a>
-                        <span class="main-navigation__list-item-count"><?=count_task($task_array,$value)?></span>
+                        <a class="main-navigation__list-item-link" href=""><?=htmlspecialchars($value['name'])?></a>
+                        <span class="main-navigation__list-item-count"></span>
                     </li>
-                <?endif;?>
             <?endforeach;?>
         </ul>
     </nav>
@@ -56,7 +55,7 @@
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                         <!--вывожу название задачи-->
-                        <span class="checkbox__text"><?=htmlspecialchars($value['task_name'])?></span>
+                        <span class="checkbox__text"><?=htmlspecialchars($value['name'])?></span>
                     </label>
                 </td>
 
