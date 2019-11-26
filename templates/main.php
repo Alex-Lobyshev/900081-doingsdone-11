@@ -6,7 +6,7 @@
             <?php
             foreach($project_array as $key => $value): ?>
                     <li class="main-navigation__list-item">
-                        <a class="main-navigation__list-item-link" href=""><?=htmlspecialchars($value['name'])?></a>
+                        <a class="main-navigation__list-item-link" href="index.php?cat_id=<?=htmlspecialchars($value['id'])?>"><?=htmlspecialchars($value['name'])?></a>
                         <span class="main-navigation__list-item-count"></span>
                     </li>
             <?endforeach;?>
@@ -43,6 +43,7 @@
 
     <table class="tasks">
         <!--Запускаю цикл foreach для того чтобы пробежать ассоциативный массив-->
+        <?php if(count($task_array)):?>
         <?php foreach ($task_array as $task => $value):?>
             <!--Проверяю, если в ключе "Выполнена" значение выполнена, то добавляю класс task--completed-->
 
@@ -81,6 +82,11 @@
                 <td class="task__controls"></td>
             </tr>
         <?endforeach;?>
+
+        <?php else: {
+            print ("В категории нет задач");
+        }?>
+        <?php endif;?>
     </table>
 </main>
 

@@ -167,46 +167,32 @@ function get_projects($con, $user_id){
 
         if ($result) {
             $project_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            if(isset($_GET['project_id'])) {
+                echo 1;
+            }
         } else {
             $error = mysqli_connect_error();
             print ('Ошибка MySQL' . $error);
         }
 
     return $project_array;
+
+
+
 };
 
-/*function count_projects($db_connect, $user_id){
-    $conn = mysqli_connect($db_connect['host'], $db_connect['user'], $db_connect['password'], $db_connect['database']);
-    mysqli_set_charset($conn, 'utf8');
+function get_tasks($con, $user_id, $project_id){
 
-    if (!$conn) {
-        $error = mysqli_connect_error();
-        print ('Ошибка MySQL' . $error);
-    } else {
-        $sql = "SELECT name, project_id, count(id) as total from task where user_id = 4 GROUP BY project_id
-    JOIN project j where i.id = project_id
-";
-        $result = mysqli_query($conn, $sql);
 
-        if ($result) {
-            $project_array2 = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            foreach ($project_array2 as $key => $value) {
-                print $value['name'].$value['total'];
-                print '<br>';
-            }
-        } else {
-            $error = mysqli_connect_error();
-            print ('Ошибка MySQL' . $error);
-        }
+    $sql = "SELECT `id`,`is_complete`, `name`, `file_path`, `date_complete`  FROM task WHERE `user_id` = $user_id";
+
+    if (isset($project_id)) {
+        $sql .= " and project_id = $project_id";
     }
-    return $project_array2;
-
-
-};*/
-
-function get_tasks($con, $user_id){
-        $sql = "SELECT `id`,`is_complete`, `name`, `file_path`, `date_complete`  FROM task WHERE `user_id` = $user_id";
+        print_r($sql);
         $result = mysqli_query($con, $sql);
+
+
 
         if ($result) {
             $task_array = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -217,3 +203,4 @@ function get_tasks($con, $user_id){
 
     return $task_array;
 };
+
