@@ -189,7 +189,6 @@ function get_tasks($con, $user_id, $project_id){
     if (isset($project_id)) {
         $sql .= " and project_id = $project_id";
     }
-        print_r($sql);
         $result = mysqli_query($con, $sql);
 
 
