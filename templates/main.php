@@ -56,7 +56,7 @@
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                         <!--вывожу название задачи-->
-                        <span class="checkbox__text"><?=htmlspecialchars($value['name'])?></span>
+                        <span class="checkbox__text"><?=htmlspecialchars($value['name_task'])?></span>
                     </label>
                 </td>
 

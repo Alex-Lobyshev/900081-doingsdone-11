@@ -184,12 +184,11 @@ function get_projects($con, $user_id){
 function get_tasks($con, $user_id, $project_id){
 
 
-    $sql = "SELECT `id`,`is_complete`, `name`, `file_path`, `date_complete`  FROM task WHERE `user_id` = $user_id";
+    $sql = "SELECT `id`,`is_complete`, `name_task`, `file_path`, `date_complete`  FROM task WHERE `user_id` = $user_id";
 
     if (isset($project_id)) {
         $sql .= " and project_id = $project_id";
     }
-        print_r($sql);
         $result = mysqli_query($con, $sql);
 
 

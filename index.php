@@ -15,9 +15,9 @@ if(isset($product_id)) {
 
 }
 
-
-$content = include_template('main.php',['project_array'=> get_projects($con, 4), 'task_array'=>get_tasks($con, 4, $product_id), 'show_complete_tasks'=>$show_complete_tasks]);
-$layout = include_template('layout.php', ['title'=>'Главная - Дела в порядке', 'content'=> $content, 'user_name'=>'Константин']);
+$add_task_cat = include_template('add_task.php',['project_array'=> get_projects($con, 4)]);
+$content = include_template('main.php',['project_array'=> get_projects($con, 4), 'task_array'=>get_tasks($con, 4, $product_id), 'show_complete_tasks'=>$show_complete_tasks, 'add_task_cat' => $add_task_cat]);
+$layout = include_template('layout.php', ['title'=>'Главная - Дела в порядке', 'content'=> $content, 'user_name'=>'Константин', 'add_task_cat' => $add_task_cat]);
 print $layout;
 
 
