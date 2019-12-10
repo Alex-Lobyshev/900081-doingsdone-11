@@ -20,24 +20,27 @@
 
             <main class="content__main">
                 <h2 class="content__main-heading">Добавление задачи</h2>
-
+                <?php $classname = isset($error_data['name_task']) ? "form__input--error" : "111111"; ?>
                 <form class="form"  action="add.php" method="post" autocomplete="off" enctype="multipart/form-data">
                     <div class="form__row">
                         <label class="form__label" for="name_task">Название <sup>*</sup></label>
 
-                        <input class="form__input" type="text" name="name_task" id="name_task" value="" placeholder="Введите название">
+                        <input class="form__input <?=$classname;?>" type="text" name="name_task" id="name_task" value="<?=getPostVal('name_task'); ?>" placeholder="Введите название">
+                        <span class="error_text"><?=$error_data['name_task'] ?? ""; ?></span>
                     </div>
 
                     <div class="form__row">
                         <label class="form__label" for="project">Проект <sup>*</sup></label>
 
 
-                        <select class="form__input form__input--select" name="project" id="project">
+                        <select class="form__input form__input--select <?=$classname;?>" name="project" id="project">
                             <option value="">Выберите категорию</option>
+                            <?php $classname = isset($error_data[project]) ? "form__input--error" : ""; ?>
                             <?php foreach($project_array as $key => $value): ?>
-                                <option value="<?=$value['id']?>"><?=htmlspecialchars($value['name'])?></option>
+                                <option value="<?=$value['id']; ?>"><?=htmlspecialchars($value['name'])?></option>
                             <?endforeach;?>
                         </select>
+                        <span class="error_text"><?=$error_data[project] ?? ""; ?></span>
                     </div>
 
                     <div class="form__row">

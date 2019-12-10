@@ -203,3 +203,16 @@ function get_tasks($con, $user_id, $project_id){
     return $task_array;
 };
 
+function getPostVal($name) {
+    return $_POST[$name] ?? "";
+};
+
+function validateFilled($name) {
+    if (empty($_POST[$name])) {
+        return "Это поле должно быть заполнено";
+    } else {
+        return $name;
+    }
+};
+
+
